@@ -7,7 +7,6 @@ namespace BoraWmsNew.Roles.Dto
     public class RoleListDto : EntityDto, IHasCreationTime
     {
         public string Name { get; set; }
-
         public string DisplayName { get; set; }
 
         public bool IsStatic { get; set; }

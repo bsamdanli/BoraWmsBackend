@@ -32,12 +32,14 @@
 	  <text name="Products" value="Ürünler" />
 	  <text name="Storages" value="Ambarlar" />
 	  <text name="Receiving" value="Mal Kabul" />
+	  <text name="Transfer" value="Transfer" />
 	  
 	  
     <text name="SavedSuccessfully" value="Başarıyla kaydedildi" />
     <text name="CreateNewTenant" value="Yeni müşteri oluştur" />
 	  
 	  <text name="CreateNewClient" value="Yeni Müşteri Oluştur" />
+	  <text name="SelectClient" value="Müşteri Seç" />
 	  <text name="EditClient" value="Müşteriyi Düzenle" />
 	  <text name="ClientName" value="Müşteri İsmi" />
 	  <text name="Address" value="Adres" />
@@ -62,6 +64,16 @@
 	  <text name="DocumentNo" value="Evrak Numarası" />
 	  <text name="DocumentDate" value="Evrak Tarihi" />
 	  <text name="DocumentSituation" value="Evrak Durumu" />
+
+	  <text name="CreateNewTransfer" value="Yeni Transfer Oluştur" />
+	  <text name="Type" value="Transfer Tipi" />
+	  <text name="SelectStorage" value="Ambar Seç" />
+	  <text name="SelectStorageIn" value="Giriş Ambarı Seç" />
+	  <text name="SelectStorageOut" value="Çıkış Ambarı Seç" />
+	  <text name="SelectProduct" value="Ürün Seç" />
+	  <text name="CreationTime" value="Oluşturma Tarihi" />
+	  <text name="In" value="Giriş" />
+	  <text name="Out" value="Çıkış" />
 	  
     <text name="AdminEmailAddress" value="Yönetici e-posta adresi" />
     <text name="AdminPassword" value="Yönetici şifresi" />

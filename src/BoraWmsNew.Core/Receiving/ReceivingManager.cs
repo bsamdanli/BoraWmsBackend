@@ -35,7 +35,7 @@ namespace BoraWmsNew.Receiving
         public DocumentDetail GetDocumentDetail(long id)
         {
             var repo = _receivingDetailRepository.GetAll()
-                .Where(p => p.Id == id);
+                .Where(p => p.Id == id).Include(p=> p.Product);
 
             if (repo.Count() == 0)
                 return null;
@@ -61,11 +61,18 @@ namespace BoraWmsNew.Receiving
             return documentList.Include(prop => prop.Client).ToList();
 
         }
+        //public List<Document> GetDocumentDetailList()
+        //{
+        //    var documentDetailList = _receivingRepository.GetAll();
+
+        //    return documentDetailList.Include(prop => prop.Client).ToList();
+
+        //}
 
 
         public List<DocumentDetail> GetDocumentDetailListByDocumentId(int documentId)
         {
-            var documentDetailList = _receivingDetailRepository.GetAll().Where(p => p.Document.Id == documentId);
+            var documentDetailList = _receivingDetailRepository.GetAll().Where(p => p.DocumentId == documentId).Include(p=>p.Product);
 
             return documentDetailList.ToList();
 
@@ -81,7 +88,15 @@ namespace BoraWmsNew.Receiving
             _receivingDetailRepository.Delete(entity);
         }
 
+        public IQueryable<Document> GetDocumentDetailList()
+        {
+            var documentDetailList = _receivingRepository.GetAll();
 
+            return documentDetailList;
+
+        }
+
+       
     }
 
 }

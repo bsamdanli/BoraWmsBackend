@@ -23,6 +23,8 @@ namespace BoraWmsNew.Receiving.Dto
         public int[] ProductsIds { get; set; }
         public string[] ProductsCodes { get; set; }
         public int[] Quantities { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
 }

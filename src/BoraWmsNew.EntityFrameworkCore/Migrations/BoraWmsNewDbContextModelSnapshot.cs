@@ -1581,6 +1581,9 @@ namespace BoraWmsNew.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -1716,6 +1719,9 @@ namespace BoraWmsNew.Migrations
                     b.Property<string>("DocumentNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1725,14 +1731,9 @@ namespace BoraWmsNew.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Documents");
                 });
@@ -1760,6 +1761,9 @@ namespace BoraWmsNew.Migrations
                     b.Property<int>("DocumentId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1784,7 +1788,57 @@ namespace BoraWmsNew.Migrations
                     b.ToTable("DocumentDetails");
                 });
 
-            modelBuilder.Entity("BoraWmsNew.Storage.Storage", b =>
+            modelBuilder.Entity("BoraWmsNew.StockMovements.StockMovement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StorageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StorageId");
+
+                    b.ToTable("StockMovements");
+                });
+
+            modelBuilder.Entity("BoraWmsNew.Storages.Storage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2059,13 +2113,7 @@ namespace BoraWmsNew.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BoraWmsNew.Products.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Client");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BoraWmsNew.Receiving.DocumentDetail", b =>
@@ -2085,6 +2133,21 @@ namespace BoraWmsNew.Migrations
                     b.Navigation("Document");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BoraWmsNew.StockMovements.StockMovement", b =>
+                {
+                    b.HasOne("BoraWmsNew.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("BoraWmsNew.Storages.Storage", "Storage")
+                        .WithMany()
+                        .HasForeignKey("StorageId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Storage");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

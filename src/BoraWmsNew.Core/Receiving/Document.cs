@@ -17,10 +17,9 @@ namespace BoraWmsNew.Receiving
 
         public Client Client { get; set; }
         public int ClientId { get; set; }
-        public Product Product { get; set; }
-
         public string DocumentNo { get; set; }
         public string DocumentDate { get; set; }
+        public bool IsCompleted { get; set; }
 
     }
 }

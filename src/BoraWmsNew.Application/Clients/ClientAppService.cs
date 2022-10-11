@@ -52,6 +52,7 @@ namespace BoraWmsNew.Clients
                 TaxNumber = clientDto.TaxNumber,
                 TaxOffice = clientDto.TaxOffice,
                 PhoneNumber = clientDto.PhoneNumber,
+                IsActive = clientDto.IsActive
             };
             _clientManager.CreateClient(client);
             CurrentUnitOfWork.SaveChanges();
@@ -62,7 +63,8 @@ namespace BoraWmsNew.Clients
         //pagedresultdto
         public PagedResultDto<ClientDto> GetClientListPaged(PagedClientResultRequestDto input)
         {
-            var repo = _clientManager.GetClientList().WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Name.Contains(input.Keyword));
+            var repo = _clientManager.GetClientList().WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
+            .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
             var count = repo.Count();
             repo = repo.OrderBy(p => p.Name).PageBy(input);
             return new PagedResultDto<ClientDto>()
@@ -76,12 +78,22 @@ namespace BoraWmsNew.Clients
         {
             var client = _clientManager.GetClient(clientDto.Id);
 
+            var clientOld =  _clientManager.GetClientList().Where(c=>c.Name== clientDto.Name).FirstOrDefault();
+
+            if (client != null && clientOld.Id != client.Id)
+            {
+                throw new UserFriendlyException("Girilen Müşteri İsmine Sahip bir Müşteri Mevcut.");
+            }
+
+            
+
             client.Name = String.IsNullOrEmpty(clientDto.Name) ? client.Name : clientDto.Name;
             client.Email = String.IsNullOrEmpty(clientDto.Email) ? clientDto.Email : clientDto.Email;
             client.Address = String.IsNullOrEmpty(client.Address) ? clientDto.Address : clientDto.Address;
             client.TaxNumber = String.IsNullOrEmpty(clientDto.TaxNumber) ? clientDto.TaxNumber : clientDto.TaxNumber;
             client.TaxOffice = String.IsNullOrEmpty(clientDto.TaxOffice) ? clientDto.TaxOffice : clientDto.TaxOffice;
             client.PhoneNumber = String.IsNullOrEmpty(clientDto.PhoneNumber) ? clientDto.PhoneNumber : clientDto.PhoneNumber;
+            client.IsActive= clientDto.IsActive;
 
             _clientManager.UpdateClient(client);
             CurrentUnitOfWork.SaveChanges();

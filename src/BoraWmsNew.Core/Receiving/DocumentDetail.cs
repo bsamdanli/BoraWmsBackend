@@ -17,6 +17,8 @@ namespace BoraWmsNew.Receiving
         public Document Document { get; set; }
         public int DocumentId { get; set; }
         public int Quantity { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 

@@ -31,11 +31,14 @@
 	  <text name="Clients" value="Clients" />
 	  <text name="Products" value="Products" />
 	  <text name="Storages" value="Storages" />
+	  <text name="Transfer" value="Transfer" />
 	  
     <text name="SavedSuccessfully" value="Saved successfully" />
     <text name="CreateNewTenant" value="Create new tenant" />
 	  
 	  <text name="CreateNewClient" value="Create New Client" />
+	  <text name="ClientName" value="Client Name" />
+	  <text name="SelectClient" value="Select Client" />
 	  <text name="EditClient" value="Edit Client" />
 	  <text name="Address" value="Address" />
 	  <text name="TaxNumber" value="Tax Number" />
@@ -53,6 +56,22 @@
 	  <text name="EditStorage" value="Edit Storage" />
 	  <text name="StorageName" value="Storage Name" />
 	  <text name="StorageCode" value="Storage Code" />
+
+	  <text name="CreateNewTransfer" value="Create New Transfer" />
+	  <text name="Type" value="Transfer Type" />
+	  <text name="SelectStorage" value="Select Storage" />
+	  <text name="SelectStorageIn" value="Select Storage In" />
+	  <text name="SelectStorageOut" value="Select Storage Out" />
+	  <text name="SelectProduct" value="Select Product" />
+	  <text name="CreationTime" value="Creation Time" />
+	  <text name="In" value="In" />
+	  <text name="Out" value="Out" />
+
+	  <text name="CreateNewDocument" value="Create New Document" />
+	  <text name="EditDocument" value="Edit Document" />
+	  <text name="DocumentNo" value="Document No" />
+	  <text name="DocumentDate" value="Document Date" />
+	  <text name="DocumentSituation" value="Document Situation" />
 	  
     <text name="AdminEmailAddress" value="Admin email address" />
     <text name="AdminPassword" value="Admin password" />

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoraWmsNew.Storage.Dto
+namespace BoraWmsNew.Storages.Dto
 {
     public class PagedStorageResultRequestDto : PagedResultRequestDto
     {

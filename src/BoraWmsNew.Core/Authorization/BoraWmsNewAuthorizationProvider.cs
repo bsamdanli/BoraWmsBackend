@@ -14,7 +14,10 @@ namespace BoraWmsNew.Authorization
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
             context.CreatePermission(PermissionNames.Pages_Client, L("Client"));
             context.CreatePermission(PermissionNames.Pages_Product, L("Product"));
+            context.CreatePermission(PermissionNames.Pages_StockMovement, L("StockMovement"));
+
             context.CreatePermission(PermissionNames.Pages_Storage, L("Storage"));
+            context.CreatePermission(PermissionNames.Pages_Stock, L("Stock"));
             context.CreatePermission(PermissionNames.Pages_Receiving, L("Receiving"));
         }
 

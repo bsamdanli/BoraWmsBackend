@@ -12,9 +12,13 @@
         public const string Pages_Client = "Pages.Client";
 
         public const string Pages_Product = "Pages.Product";
-        
+
+        public const string Pages_StockMovement = "Pages.StockMovement";
+
         public const string Pages_Storage = "Pages.Storage";
-        
+
+        public const string Pages_Stock = "Pages.Stock";
+
         public const string Pages_Receiving = "Pages.Receiving";
     }
 }

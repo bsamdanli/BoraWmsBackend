@@ -6,14 +6,15 @@ using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.UI;
 using BoraWmsNew.Authorization;
-using BoraWmsNew.Storage.Dto;
+using BoraWmsNew.Storages.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoraWmsNew.Storage
+
+namespace BoraWmsNew.Storages
 {
     [AbpAuthorize(PermissionNames.Pages_Storage)]
     public class StorageAppService : BoraWmsNewAppServiceBase
@@ -39,8 +40,8 @@ namespace BoraWmsNew.Storage
         public StorageDto CreateStorage(StorageDto storageDto)
         {
 
-            if (_storageManager.GetStorageList().Where(o => o.Name == storageDto.Name).Count() > 0)
-                throw new UserFriendlyException("Oluşturmak İstediğiniz Müşteri Zaten Mevcut.");
+            if (_storageManager.GetStorageList().Where(o => o.StorageCode == storageDto.StorageCode).Count() > 0)
+                throw new UserFriendlyException(storageDto.StorageCode + " Kodlu Oluşturmak İstediğiniz Ambar Zaten Mevcut.");
 
             Storage storage = new()
             {
@@ -68,6 +69,13 @@ namespace BoraWmsNew.Storage
         public StorageDto UpdateStorage(StorageDto storageDto)
         {
             var storage = _storageManager.GetStorage(storageDto.Id);
+
+            var storageOld = _storageManager.GetStorageList().Where(c => c.StorageCode == storageDto.StorageCode).FirstOrDefault();
+
+            if (storage != null && storageOld.Id != storage.Id)
+            {
+                throw new UserFriendlyException(storageDto.StorageCode + " Kodlu Ambar Zaten Mevcut.");
+            }
 
             storage.Name = String.IsNullOrEmpty(storageDto.Name) ? storageDto.Name : storageDto.Name;
             storage.StorageCode = String.IsNullOrEmpty(storageDto.StorageCode) ? storageDto.StorageCode : storageDto.StorageCode;

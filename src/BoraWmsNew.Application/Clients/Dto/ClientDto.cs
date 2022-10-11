@@ -17,6 +17,7 @@ namespace BoraWmsNew.Clients.Dto
         public string TaxNumber { get; set; }
         public string TaxOffice { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsActive { get; set; }
     }
 
 }

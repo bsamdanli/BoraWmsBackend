@@ -72,14 +72,35 @@ namespace BoraWmsNew.Products
                 TotalCount = count
             };
         }
+        public PagedResultDto<ProductDto> GetProductListForSearchPaged(PagedProductResultRequestDto input)
+        {
+            var repo = _productManager.GetProductList().WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Name.Contains(input.Keyword));
+            var count = repo.Count();
+            repo = repo.OrderBy(p => p.Name).PageBy(input);
+            return new PagedResultDto<ProductDto>()
+            {
+                Items = ObjectMapper.Map<List<ProductDto>>(repo),
+                TotalCount = count
+            };
+        }
 
         public ProductDto UpdateProduct(ProductDto productDto)
         {
+            var product = _productManager.GetProduct(productDto.Id);
+
+            var productOld = _productManager.GetProductList().Where(c => c.StockCode == productDto.StockCode).FirstOrDefault();
+
+            if (product != null && productOld.Id != product.Id)
+            {
+                throw new UserFriendlyException(productDto.StockCode + " Stok Kodlu Ürün Zaten Mevcut.");
+            }
 
             //if (_productManager.GetProductList().Where(o => o.StockCode == productDto.StockCode).Count() > 0)
+            //{
             //    throw new UserFriendlyException(productDto.StockCode + " Stok Kodlu Ürün Zaten Mevcut.");
+            //}
 
-            var product = _productManager.GetProduct(productDto.Id);
+
 
             product.Name = String.IsNullOrEmpty(productDto.Name) ? productDto.Name : productDto.Name;
             product.Quantity = (productDto.Quantity != null) ? productDto.Quantity : productDto.Quantity;

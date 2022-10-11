@@ -12,7 +12,10 @@ namespace BoraWmsNew.EntityFrameworkCore
         /* Define a DbSet for each entity of the application */
         public DbSet<BoraWmsNew.Clients.Client> Client { get; set; } //Yada using BoraWmsNew.Client olarak ekle.
         public DbSet<BoraWmsNew.Products.Product> Product { get; set; }
-        public DbSet<BoraWmsNew.Storage.Storage> Storage { get; set; }
+        public DbSet<BoraWmsNew.Storages.Storage> Storage { get; set; }
+
+        public DbSet<BoraWmsNew.StockMovements.StockMovement> StockMovements { get; set; }
+
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentDetail> DocumentDetails { get; set; }
 
